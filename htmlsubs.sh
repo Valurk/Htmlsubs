@@ -1,7 +1,8 @@
 #!/bin/bash
 
+
 	if [ "$1" == "" ]
-then echo -e "
+then echo -e " \e[32m
 ██╗  ██╗████████╗███╗   ███╗██╗     ███████╗██╗   ██╗██████╗ ███████╗
 ██║  ██║╚══██╔══╝████╗ ████║██║     ██╔════╝██║   ██║██╔══██╗██╔════╝
 ███████║   ██║   ██╔████╔██║██║     ███████╗██║   ██║██████╔╝███████╗
@@ -18,22 +19,22 @@ else
 	 		 
 	 grep href index.html | cut -d  "/" -f 3 | grep "\." | cut -d '"' -f 1 | grep -v "<l" > result
 	 
-	 echo ">>>>> searching for subdomains! <<<<<"
+	 echo -e "\e[31;1m >>>>> searching for subdomains! <<<<<"
 	 	 	 	 
-	 for url in $(cat result); do host $url | grep "has address" ; done >result2
+	 for url in $(cat result); do host $url | grep "has address" ; done >results
 	 
 	 clear
 	 
-	 sed -i 's/has address/>>>>>>>>>>/g' result2
+	 sed -i 's/has address/>>>>>>>>>>/g' results
 	 
-	 echo "                 ▼▼▼▼▼▼ RESULTS ▼▼▼▼▼▼"
+	 echo -e "\e[31;1m                ▼▼▼▼▼▼ RESULTS ▼▼▼▼▼▼"
 	 echo '' 
-	 cat result2
-
+	 
+	 sort results | uniq #formatting the file
+	 
 	 	 
 	 rm index.html
-	 	 
-	 #sort result | uniq #formatting the file
-	 #cat result
-	 	 
+	 rm result
+	 		 	 
 fi
+
